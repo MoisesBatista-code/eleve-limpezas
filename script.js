@@ -149,14 +149,13 @@ const listaProdutos = [
   },
   {
     id: 15,
-    nome: "Copo Descartável 250ml (100 un.)",
+    nome: "Copo Descartável 180ml",
     categoria: "Descartáveis",
     preco: 5.99,
-    imagem:
-      '<img src="docs/COPO 250ML.jpg" alt="Copo Descartável Copobras 250ml">',
+    imagem: '<img src="docs/COPO 180ML.jpg" alt="Copo Descartável 180ml">',
     emDestaque: false,
     descricao:
-      "Copos descartáveis Copobras de 250ml, pacote com 100 unidades. Ideal para festas, eventos, reuniões e muito mais.",
+      "Copos descartáveis Copobras de 180ml. Ideal para festas, eventos, reuniões e muito mais.",
   },
 ];
 
