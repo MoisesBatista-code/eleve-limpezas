@@ -130,7 +130,7 @@ const listaProdutos = [
     id: 13,
     nome: "Desinfetante Limpa Bom 5L",
     categoria: "Desinfetante",
-    preco: 15.0,
+    preco: 13.99,
     imagem:
       '<img src="docs/LIMPADOR PERFUMADO.jpg" alt="Desinfetante Limpa Bom 5L">',
     emDestaque: false,
