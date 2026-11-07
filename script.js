@@ -132,7 +132,7 @@ const listaProdutos = [
     categoria: "Desinfetante",
     preco: 13.99,
     imagem:
-      '<img src="docs/LIMPADOR PERFUMADO.jpg" alt="Desinfetante Limpa Bom 5L">',
+      '<img src="docs/LIMPADOR PERFUMADO.jpg" alt="Desinfetante Limpa Bom 4L">',
     emDestaque: false,
     descricao:
       "Mais limpeza e mais perfume para a sua casa! Limpa e perfuma por mais tempo, pronto para uso, ideal para toda a casa. Fragrâncias: Limão, Lavanda e Floral.",
