@@ -128,7 +128,7 @@ const listaProdutos = [
   },
   {
     id: 13,
-    nome: "Desinfetante Limpa Bom 5L",
+    nome: "Desinfetante Limpa Bom 4L",
     categoria: "Desinfetante",
     preco: 13.99,
     imagem:
