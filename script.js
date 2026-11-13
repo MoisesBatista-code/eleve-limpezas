@@ -164,23 +164,76 @@ let carrinho = JSON.parse(localStorage.getItem("eleve_carrinho")) || [];
 document.addEventListener("DOMContentLoaded", () => {
   renderizarProdutos();
   configurarBusca();
+  configurarHeroInterativa();
 
   // Navegação
   document
     .getElementById("abrir-carrinho-btn")
-    ?.addEventListener("click", mostrarCarrinho);
+    ?.addEventListener("click", () => {
+      if (estaNaTelaInicial()) {
+        entrarNoSite(null, "carrinho");
+      } else {
+        mostrarCarrinho();
+      }
+    });
   document
     .getElementById("voltar-loja-btn")
     ?.addEventListener("click", mostrarLoja);
-  document.getElementById("logo-btn")?.addEventListener("click", mostrarLoja);
+  document.getElementById("logo-btn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (estaNaTelaInicial()) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      mostrarLoja();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
 
-  // Catálogo
+  // Links da Barra de Navegação (funcionam na Tela Inicial e dentro do Site)
+  document.getElementById("nav-inicio-btn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (estaNaTelaInicial()) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      mostrarLoja();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+  document
+    .getElementById("nav-destaques-btn")
+    ?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (estaNaTelaInicial()) {
+        entrarNoSite("produtos");
+      } else {
+        mostrarLoja();
+        document
+          .getElementById("produtos")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   document
     .getElementById("nav-catalogo-btn")
     ?.addEventListener("click", (e) => {
       e.preventDefault();
-      mostrarCatalogo();
+      if (estaNaTelaInicial()) {
+        entrarNoSite(null, "catalogo");
+      } else {
+        mostrarCatalogo();
+      }
     });
+  document.getElementById("nav-contato-btn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (estaNaTelaInicial()) {
+      entrarNoSite("contato");
+    } else {
+      document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  document
+    .getElementById("hero-entrar-btn")
+    ?.addEventListener("click", () => entrarNoSite());
   document
     .getElementById("hero-catalogo-btn")
     ?.addEventListener("click", mostrarCatalogo);
@@ -194,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mostrarCatalogo();
     });
 
-  // Voltar para Home
+  // Voltar para Home (rodapé)
   document.querySelectorAll(".nav-home-btn").forEach((btn) => {
     btn.addEventListener("click", () => mostrarLoja());
   });
@@ -375,7 +428,272 @@ function renderizarProdutos(filtroTexto = "") {
   atualizarBadgesCards();
 }
 
+// INTERATIVIDADE DO VASO NA TELA INICIAL (FÍSICA DE MOLA + BOLHAS + ANDROID)
+function configurarHeroInterativa() {
+  const stage = document.getElementById("hero-bottle-stage");
+  const particleLayer = document.getElementById("hero-particle-layer");
+  if (!stage) return;
+
+  const reduzMovimento = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const target = {
+    rx: 0,
+    ry: 0,
+    tx: 0,
+    ty: 0,
+    scale: 1,
+    ringX: 0,
+    ringY: 0,
+    glintX: -20,
+    spotX: 50,
+    spotY: 45,
+  };
+  const current = { ...target };
+
+  let rafId = null;
+  let resetTimer = null;
+  let pulseTimer = null;
+  let lastBubbleTime = 0;
+
+  const animarMola = () => {
+    const ease = 0.16;
+    let emMovimento = false;
+
+    for (const key of Object.keys(target)) {
+      const diff = target[key] - current[key];
+      if (Math.abs(diff) > 0.02) {
+        current[key] += diff * ease;
+        emMovimento = true;
+      } else {
+        current[key] = target[key];
+      }
+    }
+
+    stage.style.setProperty("--rx", `${current.rx.toFixed(2)}deg`);
+    stage.style.setProperty("--ry", `${current.ry.toFixed(2)}deg`);
+    stage.style.setProperty("--tx", `${current.tx.toFixed(2)}px`);
+    stage.style.setProperty("--ty", `${current.ty.toFixed(2)}px`);
+    stage.style.setProperty("--scale", current.scale.toFixed(3));
+    stage.style.setProperty("--ring-x", `${current.ringX.toFixed(2)}px`);
+    stage.style.setProperty("--ring-y", `${current.ringY.toFixed(2)}px`);
+    stage.style.setProperty("--glint-x", `${current.glintX.toFixed(1)}%`);
+    stage.style.setProperty("--spot-x", `${current.spotX.toFixed(1)}%`);
+    stage.style.setProperty("--spot-y", `${current.spotY.toFixed(1)}%`);
+
+    if (emMovimento) {
+      rafId = requestAnimationFrame(animarMola);
+    } else {
+      rafId = null;
+    }
+  };
+
+  const iniciarMola = () => {
+    if (!rafId) {
+      rafId = requestAnimationFrame(animarMola);
+    }
+  };
+
+  const emitirBolhas = (clientX, clientY, quantidade = 6, espalhamento = 70) => {
+    if (!particleLayer || reduzMovimento) return;
+    if (particleLayer.childElementCount > 24) return;
+
+    const rect = stage.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const origemX =
+      typeof clientX === "number"
+        ? Math.max(20, Math.min(rect.width - 20, clientX - rect.left))
+        : rect.width * 0.5;
+    const origemY =
+      typeof clientY === "number"
+        ? Math.max(20, Math.min(rect.height - 20, clientY - rect.top))
+        : rect.height * 0.45;
+
+    for (let i = 0; i < quantidade; i++) {
+      const bolha = document.createElement("span");
+      bolha.className = "hero__spark-bubble";
+
+      const tamanho = 7 + Math.random() * 14;
+      const offsetX = (Math.random() - 0.5) * 28;
+      const offsetY = (Math.random() - 0.5) * 24;
+      const dx = (Math.random() - 0.5) * espalhamento * 2;
+      const dy = -(55 + Math.random() * 95);
+      const duracao = 0.8 + Math.random() * 0.55;
+
+      bolha.style.width = `${tamanho.toFixed(1)}px`;
+      bolha.style.height = `${tamanho.toFixed(1)}px`;
+      bolha.style.left = `${(origemX + offsetX).toFixed(1)}px`;
+      bolha.style.top = `${(origemY + offsetY).toFixed(1)}px`;
+      bolha.style.setProperty("--bx", `${dx.toFixed(1)}px`);
+      bolha.style.setProperty("--by", `${dy.toFixed(1)}px`);
+      bolha.style.setProperty("--dur", `${duracao.toFixed(2)}s`);
+
+      bolha.addEventListener(
+        "animationend",
+        () => {
+          bolha.remove();
+        },
+        { once: true }
+      );
+
+      particleLayer.appendChild(bolha);
+    }
+  };
+
+  const atualizarAlvo = (clientX, clientY, escala = 1.06) => {
+    const rect = stage.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const clampX = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const clampY = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+    const nx = clampX - 0.5;
+    const ny = clampY - 0.5;
+
+    target.ry = nx * 30;
+    target.rx = -ny * 22;
+    target.tx = nx * 16;
+    target.ty = ny * 12 - 6;
+    target.scale = escala;
+    target.ringX = -nx * 14;
+    target.ringY = -ny * 10;
+    target.glintX = nx * 70;
+    target.spotX = clampX * 100;
+    target.spotY = clampY * 100;
+
+    iniciarMola();
+  };
+
+  const resetarAlvo = () => {
+    stage.classList.remove("is-interacting");
+    target.rx = 0;
+    target.ry = 0;
+    target.tx = 0;
+    target.ty = 0;
+    target.scale = 1;
+    target.ringX = 0;
+    target.ringY = 0;
+    target.glintX = -20;
+    target.spotX = 50;
+    target.spotY = 45;
+    iniciarMola();
+  };
+
+  const dispararPulso = (clientX, clientY) => {
+    stage.classList.remove("is-pulsing");
+    void stage.offsetWidth;
+    stage.classList.add("is-pulsing");
+    emitirBolhas(clientX, clientY, 9, 85);
+
+    clearTimeout(pulseTimer);
+    pulseTimer = setTimeout(() => {
+      stage.classList.remove("is-pulsing");
+    }, 850);
+  };
+
+  stage.addEventListener("pointerenter", (e) => {
+    if (e.pointerType !== "mouse") return;
+    clearTimeout(resetTimer);
+    stage.classList.add("is-interacting");
+    emitirBolhas(e.clientX, e.clientY, 4, 55);
+  });
+
+  stage.addEventListener("pointermove", (e) => {
+    if (e.pointerType === "mouse") {
+      clearTimeout(resetTimer);
+      stage.classList.add("is-interacting");
+      atualizarAlvo(e.clientX, e.clientY, 1.06);
+
+      const agora = Date.now();
+      if (agora - lastBubbleTime > 95) {
+        lastBubbleTime = agora;
+        emitirBolhas(e.clientX, e.clientY, 2, 42);
+      }
+    }
+  });
+
+  stage.addEventListener("pointerleave", (e) => {
+    if (e.pointerType !== "mouse") return;
+    resetarAlvo();
+  });
+
+  // Toque / Clique: Android-first sem bloquear rolagem vertical
+  stage.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse") {
+      clearTimeout(resetTimer);
+      stage.classList.add("is-interacting");
+      atualizarAlvo(e.clientX, e.clientY, 1.08);
+    }
+    dispararPulso(e.clientX, e.clientY);
+  });
+
+  stage.addEventListener("pointerup", (e) => {
+    if (e.pointerType !== "mouse") {
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(resetarAlvo, 520);
+    }
+  });
+
+  stage.addEventListener("pointercancel", () => {
+    clearTimeout(resetTimer);
+    resetarAlvo();
+  });
+
+  stage.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      stage.classList.add("is-interacting");
+      target.scale = 1.06;
+      target.ty = -6;
+      iniciarMola();
+      dispararPulso();
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(resetarAlvo, 650);
+    }
+  });
+}
+
 // NAVEGAÇÃO DE TELAS
+function estaNaTelaInicial() {
+  const telaInicio = document.getElementById("view-inicio");
+  return Boolean(telaInicio && !telaInicio.classList.contains("hero--hidden"));
+}
+
+function entrarNoSite(destinoSecao = null, viewAlvo = "loja") {
+  const telaInicio = document.getElementById("view-inicio");
+  const siteApp = document.getElementById("site-app");
+
+  if (telaInicio) {
+    telaInicio.classList.add("hero--hidden");
+  }
+
+  if (siteApp) {
+    siteApp.classList.remove("site-app--hidden");
+  }
+
+  if (viewAlvo === "catalogo") {
+    mostrarCatalogo();
+    return;
+  }
+
+  if (viewAlvo === "carrinho") {
+    mostrarCarrinho();
+    return;
+  }
+
+  mostrarLoja();
+  if (destinoSecao) {
+    requestAnimationFrame(() => {
+      document
+        .getElementById(destinoSecao)
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+  } else {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+}
+
 function esconderTodasViews() {
   document.getElementById("view-loja").style.display = "none";
   document.getElementById("view-carrinho").style.display = "none";
