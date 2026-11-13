@@ -106,9 +106,9 @@ const listaProdutos = [
   },
   {
     id: 11,
-    nome: "Sabão Líquido Limpa Bom 4L",
+    nome: "Sabonete Líquido Limpa Bom 4L",
     categoria: "Limpeza",
-    preco: 23.99,
+    preco: 24.99,
     imagem:
       '<img src="docs/SABAO LIQUIDO ERVA DOCE.jpg" alt="Sabão Líquido Perfumado Limpa Bom 4L Erva Doce">',
     emDestaque: false,
