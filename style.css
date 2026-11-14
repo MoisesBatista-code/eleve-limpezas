@@ -1,4 +1,3 @@
-
 /* --- VARIÁVEIS DE DESIGN SYSTEM (DESIGN TOKENS) --- */
 :root {
   /* Paleta Primária - Azul Real & Ciano Luminoso */
@@ -6,7 +5,7 @@
   --primary-hover: #0052cc;
   --primary-light: #eff6ff;
   --primary-glow: rgba(0, 102, 255, 0.28);
-  
+
   --accent: #00d2ff;
   --accent-gradient: linear-gradient(135deg, #0066ff 0%, #00c6ff 100%);
   --accent-glow: rgba(0, 210, 255, 0.35);
@@ -17,7 +16,7 @@
   --text-main: #1e293b;
   --text-muted: #64748b;
   --text-light: #94a3b8;
-  
+
   --bg-page: #f8fafc;
   --bg-subtle: #f1f5f9;
   --white: #ffffff;
@@ -35,9 +34,14 @@
 
   /* Sombras Elegantes Multicamadas */
   --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 10px 15px -3px rgba(15, 23, 42, 0.07), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
-  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-sm:
+    0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-md:
+    0 10px 15px -3px rgba(15, 23, 42, 0.07),
+    0 4px 6px -4px rgba(15, 23, 42, 0.05);
+  --shadow-lg:
+    0 20px 25px -5px rgba(15, 23, 42, 0.08),
+    0 8px 10px -6px rgba(15, 23, 42, 0.04);
   --shadow-xl: 0 25px 50px -12px rgba(0, 102, 255, 0.18);
   --shadow-hover: 0 22px 35px -10px rgba(0, 102, 255, 0.16);
 
@@ -59,11 +63,19 @@ html {
   scroll-behavior: smooth;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -79,11 +91,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-image: 
-    radial-gradient(ellipse 90% 60% at 85% -10%, rgba(0, 210, 255, 0.16) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 50% at 10% 25%, rgba(0, 102, 255, 0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 90% 70%, rgba(0, 210, 255, 0.08) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 20% 95%, rgba(0, 102, 255, 0.07) 0%, transparent 50%),
+  background-image:
+    radial-gradient(
+      ellipse 90% 60% at 85% -10%,
+      rgba(0, 210, 255, 0.16) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 50% at 10% 25%,
+      rgba(0, 102, 255, 0.1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 90% 70%,
+      rgba(0, 210, 255, 0.08) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 20% 95%,
+      rgba(0, 102, 255, 0.07) 0%,
+      transparent 50%
+    ),
     linear-gradient(180deg, #ffffff 0%, #f4f8fe 40%, #eef5fc 100%);
   background-attachment: fixed;
 }
@@ -94,7 +122,12 @@ img {
   display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Outfit", "Poppins", sans-serif;
   color: var(--dark);
   font-weight: 700;
@@ -107,7 +140,10 @@ a {
   touch-action: manipulation;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
   touch-action: manipulation;
 }
@@ -119,7 +155,9 @@ button, input, select, textarea {
 }
 
 .view {
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 
 /* ==========================================================================
@@ -249,15 +287,22 @@ button, input, select, textarea {
   min-height: 100vh;
   min-height: 100svh;
   min-height: 100dvh;
-  padding:
-    max(20px, env(safe-area-inset-top, 0px))
+  padding: max(20px, env(safe-area-inset-top, 0px))
     max(16px, env(safe-area-inset-right, 0px))
     max(24px, env(safe-area-inset-bottom, 0px))
     max(16px, env(safe-area-inset-left, 0px));
   background-color: #f6faff;
   background-image:
-    radial-gradient(ellipse 85% 60% at 82% 14%, rgba(0, 210, 255, 0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 75% 55% at 14% 82%, rgba(0, 102, 255, 0.14) 0%, transparent 60%),
+    radial-gradient(
+      ellipse 85% 60% at 82% 14%,
+      rgba(0, 210, 255, 0.22) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 75% 55% at 14% 82%,
+      rgba(0, 102, 255, 0.14) 0%,
+      transparent 60%
+    ),
     linear-gradient(160deg, #ffffff 0%, #f1f7ff 52%, #e6f2ff 100%);
   overflow-x: hidden;
   overflow-x: clip;
@@ -289,7 +334,11 @@ button, input, select, textarea {
   height: 320px;
   top: -110px;
   left: -100px;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.16) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 102, 255, 0.16) 0%,
+    transparent 70%
+  );
 }
 
 .hero__bg-orb--accent {
@@ -297,7 +346,11 @@ button, input, select, textarea {
   height: 360px;
   bottom: -120px;
   right: -110px;
-  background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 255, 0.2) 0%,
+    transparent 70%
+  );
 }
 
 .hero__container {
@@ -307,7 +360,7 @@ button, input, select, textarea {
   max-width: 1180px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "brand"
     "showcase"
@@ -344,6 +397,8 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero__stage {
@@ -357,6 +412,8 @@ button, input, select, textarea {
   --spot-x: 50%;
   --spot-y: 45%;
   --glint-x: -20%;
+  --label-shine: 0%;
+  --label-rot: 0%;
   position: relative;
   width: clamp(240px, 68vw, 310px);
   height: clamp(235px, 34dvh, 305px);
@@ -387,7 +444,9 @@ button, input, select, textarea {
     rgba(0, 102, 255, 0.15) 55%,
     transparent 76%
   );
-  transition: transform 0.38s var(--ease-smooth), opacity 0.35s ease;
+  transition:
+    transform 0.38s var(--ease-smooth),
+    opacity 0.35s ease;
   pointer-events: none;
 }
 
@@ -415,7 +474,9 @@ button, input, select, textarea {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  transition: transform 0.4s var(--ease-smooth), border-color 0.35s ease;
+  transition:
+    transform 0.4s var(--ease-smooth),
+    border-color 0.35s ease;
 }
 
 .hero__ring--outer {
@@ -443,13 +504,21 @@ button, input, select, textarea {
 }
 
 @keyframes heroSpinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes heroSpinReverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 
 .hero__spotlight {
@@ -550,7 +619,9 @@ button, input, select, textarea {
   );
   border: 1px solid rgba(255, 255, 255, 0.85);
   opacity: 0.58;
-  transition: transform 0.35s var(--ease-smooth), opacity 0.35s ease;
+  transition:
+    transform 0.35s var(--ease-smooth),
+    opacity 0.35s ease;
 }
 
 .hero__bubble--1 {
@@ -600,7 +671,8 @@ button, input, select, textarea {
 }
 
 @keyframes heroBubbleFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
@@ -621,7 +693,8 @@ button, input, select, textarea {
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 10px rgba(0, 210, 255, 0.42);
   will-change: transform, opacity;
-  animation: heroSparkRise var(--dur, 1.1s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroSparkRise var(--dur, 1.1s) cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
 }
 
 @keyframes heroSparkRise {
@@ -631,7 +704,8 @@ button, input, select, textarea {
   }
   20% {
     opacity: 0.96;
-    transform: translate3d(calc(var(--bx) * 0.25), calc(var(--by) * 0.25), 0) scale(1.05);
+    transform: translate3d(calc(var(--bx) * 0.25), calc(var(--by) * 0.25), 0)
+      scale(1.05);
   }
   100% {
     opacity: 0;
@@ -647,17 +721,24 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform:
-    perspective(950px)
-    translate3d(var(--tx), var(--ty), 0)
-    rotateX(var(--rx))
-    rotateY(var(--ry))
-    scale(var(--scale));
+  transform: perspective(950px) translate3d(var(--tx), var(--ty), 0)
+    rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--scale));
   will-change: transform;
 }
 
-.hero__stage.is-pulsing .hero__bottle {
+.hero__stage.is-pulsing .hero__bottle-inner {
   animation: heroBottleSplash 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Frasco + rótulo flutuam juntos como uma peça só */
+.hero__bottle-inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: heroBottleFloat 4.8s ease-in-out infinite;
+  will-change: transform;
 }
 
 .hero__bottle {
@@ -668,19 +749,17 @@ button, input, select, textarea {
   display: block;
   pointer-events: none;
   filter: drop-shadow(0 16px 24px rgba(10, 37, 64, 0.22));
-  animation: heroBottleFloat 4.8s ease-in-out infinite;
   transition: filter 0.3s ease;
-  will-change: transform;
 }
 
 .hero__stage.is-interacting .hero__bottle {
-  filter:
-    drop-shadow(0 26px 36px rgba(0, 82, 204, 0.36))
+  filter: drop-shadow(0 26px 36px rgba(0, 82, 204, 0.36))
     drop-shadow(0 0 22px rgba(0, 210, 255, 0.46));
 }
 
 @keyframes heroBottleFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
@@ -689,11 +768,21 @@ button, input, select, textarea {
 }
 
 @keyframes heroBottleSplash {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-  22% { transform: translate3d(0, -14px, 0) rotate(-6deg) scale(1.07, 0.96); }
-  48% { transform: translate3d(0, -4px, 0) rotate(5deg) scale(0.97, 1.04); }
-  74% { transform: translate3d(0, -7px, 0) rotate(-2.5deg) scale(1.02); }
-  100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  22% {
+    transform: translate3d(0, -14px, 0) rotate(-6deg) scale(1.07, 0.96);
+  }
+  48% {
+    transform: translate3d(0, -4px, 0) rotate(5deg) scale(0.97, 1.04);
+  }
+  74% {
+    transform: translate3d(0, -7px, 0) rotate(-2.5deg) scale(1.02);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
 }
 
 .hero__bottle-shadow {
@@ -702,11 +791,17 @@ button, input, select, textarea {
   width: 48%;
   height: 16px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(10, 25, 47, 0.26) 0%, transparent 72%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(10, 25, 47, 0.26) 0%,
+    transparent 72%
+  );
   z-index: 1;
   pointer-events: none;
   animation: heroShadowBreath 4.8s ease-in-out infinite;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .hero__stage.is-interacting .hero__bottle-shadow {
@@ -715,7 +810,8 @@ button, input, select, textarea {
 }
 
 @keyframes heroShadowBreath {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.9;
   }
@@ -733,7 +829,8 @@ button, input, select, textarea {
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 560px;
+  min-width: 0;
+  max-width: min(560px, 100%);
   perspective: 1200px;
 }
 
@@ -741,25 +838,33 @@ button, input, select, textarea {
 .hero__title,
 .hero-title-3d {
   font-family: "Outfit", "Poppins", sans-serif;
-  font-size: clamp(1.38rem, 5.4vw, 1.9rem);
+  font-size: clamp(1.25rem, 5vw, 1.85rem);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  line-height: 1.3;
+  letter-spacing: 1px;
+  line-height: 1.25;
   margin: 0 0 12px 0;
-  display: inline-block;
+  display: block;
+  max-width: 100%;
   transform-style: preserve-3d;
   will-change: transform, filter;
   color: #0052cc;
-  background: linear-gradient(135deg, #0a2540 0%, #0052cc 35%, #00a2ff 75%, #00e5ff 100%);
+  background: linear-gradient(
+    135deg,
+    #0a2540 0%,
+    #0052cc 35%,
+    #00a2ff 75%,
+    #00e5ff 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter:
-    drop-shadow(-2px 4px 6px rgba(0, 80, 200, 0.22))
+  filter: drop-shadow(-2px 4px 6px rgba(0, 80, 200, 0.22))
     drop-shadow(0 8px 16px rgba(10, 37, 64, 0.14));
   animation: heroTitle3DFloatMobile 5s ease-in-out infinite alternate;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
   overflow-wrap: break-word;
 }
 
@@ -782,7 +887,13 @@ button, input, select, textarea {
 }
 
 .hero__description {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.55;
@@ -824,7 +935,10 @@ button, input, select, textarea {
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s var(--ease-smooth), box-shadow 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.2s var(--ease-smooth),
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
 
 .hero__cta-icon {
@@ -843,9 +957,9 @@ button, input, select, textarea {
 
 @media (hover: hover) and (pointer: fine) {
   .hero-title-3d:hover {
-    transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(30px) scale(1.03);
-    filter:
-      drop-shadow(0 8px 16px rgba(0, 102, 255, 0.38))
+    transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(30px)
+      scale(1.03);
+    filter: drop-shadow(0 8px 16px rgba(0, 102, 255, 0.38))
       drop-shadow(0 16px 28px rgba(0, 210, 255, 0.28));
   }
 
@@ -959,13 +1073,369 @@ button, input, select, textarea {
   }
 }
 
+/* ==========================================================================
+   RÓTULO CILÍNDRICO 3D (APENAS LOGO ELEVE) + BASE 3D FLUTUANTE
+   ========================================================================== */
+
+/* Rótulo aplicado na parte central do frasco (apenas logo Eleve com rotação 3D) */
+.hero__label {
+  position: absolute;
+  top: 41%;
+  left: 7%;
+  right: 7%;
+  height: 31%;
+  display: flex;
+  align-items: center;
+  border-radius: 7% / 14%;
+  background: linear-gradient(180deg, #9ad6ff 0%, #c6ebff 50%, #7ec7fb 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+    0 3px 10px rgba(0, 25, 80, 0.34);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero__label-track {
+  display: flex;
+  align-items: center;
+  width: 200%;
+  height: 100%;
+  flex-shrink: 0;
+  transform: translate3d(var(--label-rot), 0, 0);
+  will-change: transform;
+}
+
+.hero__label-slide {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6% 9%;
+  flex-shrink: 0;
+}
+
+/* Sombreamento cilíndrico: dá a impressão de o rótulo envolver o frasco em 3D */
+.hero__label::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 25, 80, 0.44) 0%,
+    rgba(0, 25, 80, 0.1) 14%,
+    transparent 32%,
+    transparent 70%,
+    rgba(0, 25, 80, 0.12) 86%,
+    rgba(0, 25, 80, 0.46) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Reflexo de luz que corre pelo rótulo ao girar/inclinar o frasco */
+.hero__label::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: 22%;
+  width: 22%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.78) 50%,
+    transparent 100%
+  );
+  transform: translateX(var(--label-shine)) skewX(-8deg);
+  pointer-events: none;
+  z-index: 3;
+  transition: transform 0.1s linear;
+}
+
+.hero__label-logo {
+  width: 82%;
+  max-height: 82%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  position: relative;
+}
+
+/* Bolhas ambientes subindo pelo fundo da tela inicial */
+.hero__ambient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero__ambient span {
+  position: absolute;
+  bottom: -40px;
+  left: var(--l);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.95),
+    rgba(0, 210, 255, 0.3) 60%,
+    rgba(0, 102, 255, 0.18)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  animation: heroAmbientRise var(--d) linear infinite var(--dl);
+}
+
+@keyframes heroAmbientRise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(14px, -55vh, 0);
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(-10px, -110vh, 0);
+    opacity: 0;
+  }
+}
+
+/* Dica de toque + medidor de espuma */
+.hero__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 102, 255, 0.14);
+  box-shadow: 0 6px 16px -8px rgba(0, 51, 153, 0.3);
+  font-family: "Inter", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e3a8a;
+  transition:
+    transform 0.3s var(--ease-smooth),
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.hero__hint-icon {
+  display: inline-block;
+  animation: heroHintTap 1.6s ease-in-out infinite;
+}
+
+@keyframes heroHintTap {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(3px) scale(0.88);
+  }
+  55% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero__foam {
+  display: none;
+  gap: 4px;
+}
+
+.hero__hint.is-counting .hero__foam {
+  display: inline-flex;
+}
+
+.hero__hint.is-counting .hero__hint-icon {
+  display: none;
+}
+
+.hero__foam i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(0, 102, 255, 0.15);
+  border: 1px solid rgba(0, 102, 255, 0.3);
+  transition:
+    background 0.25s ease,
+    transform 0.25s var(--ease-smooth);
+}
+
+.hero__foam i.is-on {
+  background: linear-gradient(135deg, #0066ff, #00d2ff);
+  border-color: transparent;
+  transform: scale(1.2);
+}
+
+.hero__hint.is-celebrating {
+  background: linear-gradient(135deg, #0066ff, #00d2ff);
+  color: #ffffff;
+  transform: scale(1.06);
+}
+
+/* Explosão de espuma ao completar o medidor */
+.hero__stage.is-celebrating .hero__bottle-inner {
+  animation: heroBottleCelebrate 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes heroBottleCelebrate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.12, 0.92) rotate(-8deg);
+  }
+  40% {
+    transform: scale(0.95, 1.08) rotate(8deg) translateY(-18px);
+  }
+  60% {
+    transform: scale(1.05) rotate(-4deg) translateY(-8px);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Entrada animada dos elementos da tela inicial */
+.hero__brand {
+  animation: heroEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero__showcase {
+  animation: heroEnterPop 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.hero__body {
+  animation: heroEnter 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroEnterPop {
+  from {
+    opacity: 0;
+    transform: scale(0.82) translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+/* Saída suave ao tocar em "Navegar" */
+.hero.hero--leaving {
+  animation: heroLeave 0.38s cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes heroLeave {
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(4px);
+  }
+}
+
+/* Botão Navegar com brilho percorrendo + ondulação ao tocar */
+.hero__cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  animation: heroCtaShine 3.2s ease-in-out infinite 1.2s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes heroCtaShine {
+  0% {
+    left: -60%;
+  }
+  45%,
+  100% {
+    left: 130%;
+  }
+}
+
+.hero__cta-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(0);
+  animation: heroCtaRipple 0.6s ease-out forwards;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes heroCtaRipple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 820px) {
+  .hero__chip {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  .hero__hint {
+    font-size: 13px;
+  }
+}
+
 /* Respeita preferência de movimento reduzido (acessibilidade Android/Desktop) */
 @media (prefers-reduced-motion: reduce) {
   .hero__ring--outer,
   .hero__ring--inner,
   .hero__bubble,
   .hero__bottle,
+  .hero__bottle-inner,
   .hero__bottle-shadow,
+  .hero__chip,
+  .hero__ambient span,
+  .hero__hint-icon,
+  .hero__cta::after,
+  .hero__brand,
+  .hero__showcase,
+  .hero__body,
   .hero-title-3d {
     animation: none;
   }
@@ -1005,7 +1475,11 @@ button, input, select, textarea {
    BANNER DE PERFORMANCE & CABEÇALHO DA VITRINE
    ========================================================================== */
 .performance-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(239, 246, 255, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(239, 246, 255, 0.95) 100%
+  );
   color: var(--dark);
   padding: 32px 28px;
   border-radius: var(--radius-lg);
@@ -1055,8 +1529,6 @@ button, input, select, textarea {
   margin: 0 auto;
 }
 
-
-
 /* ==========================================================================
    SEÇÃO DO FUNDADOR / SOBRE A ELEVE
    ========================================================================== */
@@ -1065,10 +1537,16 @@ button, input, select, textarea {
 }
 
 .founder-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.92) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 248, 255, 0.92) 100%
+  );
   border: 1px solid rgba(0, 102, 255, 0.14);
   border-radius: var(--radius-lg);
-  box-shadow: 0 14px 34px -10px rgba(0, 51, 153, 0.11), 0 2px 6px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    0 14px 34px -10px rgba(0, 51, 153, 0.11),
+    0 2px 6px rgba(0, 0, 0, 0.02);
   padding: 28px 32px;
   max-width: 900px;
   margin: 0 auto;
@@ -1080,7 +1558,10 @@ button, input, select, textarea {
   overflow: hidden;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .founder-card::before {
@@ -1106,7 +1587,7 @@ button, input, select, textarea {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 12px 24px -6px rgba(0, 102, 255, 0.2),
     0 0 0 3px #ffffff,
     0 0 0 4px rgba(0, 102, 255, 0.16);
@@ -1282,7 +1763,9 @@ button, input, select, textarea {
   color: var(--text-light);
   flex-shrink: 0;
   margin-right: 12px;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
 .search-box:focus-within .search-icon {
@@ -1372,8 +1855,14 @@ button, input, select, textarea {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
@@ -1541,9 +2030,6 @@ button, input, select, textarea {
   box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
 }
 
-
-
-
 /* --- BRILHO DE LUZ SUTIL (SHIMMER) NO BOTÃO ADICIONAR --- */
 .add-to-cart-btn::after {
   content: "";
@@ -1564,7 +2050,8 @@ button, input, select, textarea {
 }
 
 @keyframes btnShimmer {
-  0%, 75% {
+  0%,
+  75% {
     left: -70%;
     opacity: 0;
   }
@@ -1592,14 +2079,26 @@ button, input, select, textarea {
 }
 
 @keyframes addedPop {
-  0% { transform: scale(0.92); }
-  55% { transform: scale(1.06); }
-  100% { transform: scale(1.02); }
+  0% {
+    transform: scale(0.92);
+  }
+  55% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1.02);
+  }
 }
 
 @keyframes checkmarkPop {
-  0% { transform: scale(0.6) rotate(-20deg); opacity: 0; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  0% {
+    transform: scale(0.6) rotate(-20deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 /* Animação minimalista de pulso no carrinho do cabeçalho */
@@ -1608,9 +2107,15 @@ button, input, select, textarea {
 }
 
 @keyframes cartBump {
-  0% { transform: scale(1); }
-  45% { transform: scale(1.15); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Efeito Ripple de Onda no ponto exato do toque/clique */
@@ -1648,10 +2153,22 @@ button, input, select, textarea {
 }
 
 @keyframes floatPlusOne {
-  0% { opacity: 0; transform: translateY(10px) scale(0.6); }
-  30% { opacity: 1; transform: translateY(-5px) scale(1.2); }
-  75% { opacity: 1; transform: translateY(-18px) scale(1); }
-  100% { opacity: 0; transform: translateY(-28px) scale(0.8); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.2);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(-18px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scale(0.8);
+  }
 }
 
 /* Toast Glassmórfico de Confirmação na base da tela */
@@ -1700,7 +2217,6 @@ button, input, select, textarea {
   font-size: 12px;
   font-weight: bold;
 }
-
 
 /* =========================================================
    ANIMAÇÃO PREMIUM DO BOTÃO ADICIONAR
@@ -1796,7 +2312,8 @@ button, input, select, textarea {
   color: #ffffff;
   isolation: isolate;
   transform: translate(-100%, -50%);
-  animation: atcRunnerDrive var(--atc-drive) var(--atc-ease) forwards,
+  animation:
+    atcRunnerDrive var(--atc-drive) var(--atc-ease) forwards,
     atcRunnerExit 0.3s cubic-bezier(0.5, 0, 0.9, 0.5) var(--atc-drive) forwards;
 }
 
@@ -1946,7 +2463,8 @@ button, input, select, textarea {
   font-weight: 700;
   color: #ffffff;
   background: linear-gradient(135deg, #10b981, #059669);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4),
+  box-shadow:
+    0 4px 12px rgba(16, 185, 129, 0.4),
     0 0 0 2px rgba(255, 255, 255, 0.9);
   pointer-events: none;
   animation: badgeIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -2025,7 +2543,9 @@ button, input, select, textarea {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .toast-notificacao .toast-acao:hover {
@@ -2037,11 +2557,11 @@ button, input, select, textarea {
   transform: scale(0.94);
 }
 
-
 /* --- FASE 2: confirmação --- */
 .add-to-cart-btn.btn-adicionado {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-  animation: addedPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  animation:
+    addedPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     atcGlowRing 0.9s ease-out;
 }
 
@@ -2144,8 +2664,8 @@ button, input, select, textarea {
   }
   65% {
     opacity: 1;
-    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
-      scale(1) rotate(var(--r));
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1)
+      rotate(var(--r));
   }
   100% {
     opacity: 0;
@@ -2181,7 +2701,8 @@ button, input, select, textarea {
   font-weight: 800;
   color: #ffffff;
   background: linear-gradient(135deg, #10b981, #059669);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95),
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.95),
     0 8px 20px rgba(16, 185, 129, 0.5);
   will-change: transform, opacity;
 }
@@ -2274,8 +2795,6 @@ button, input, select, textarea {
     display: none; /* mantém só o nome do produto */
   }
 }
-
-
 
 /* ==========================================================================
    CARRINHO DEDICADO & FORMULÁRIO DE CHECKOUT PREMIUM
@@ -2585,8 +3104,9 @@ button, input, select, textarea {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-overlay.modal-ativo {
@@ -2836,8 +3356,6 @@ button, input, select, textarea {
     text-align: left;
     padding: 8px 12px;
   }
-
-
 
   .performance-card h2 {
     font-size: 20px;

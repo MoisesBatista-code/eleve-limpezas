@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderizarProdutos();
   configurarBusca();
   configurarHeroInterativa();
+  configurarBotaoNavegar();
 
   // Navegação
   document
@@ -231,9 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document
-    .getElementById("hero-entrar-btn")
-    ?.addEventListener("click", () => entrarNoSite());
   document
     .getElementById("hero-catalogo-btn")
     ?.addEventListener("click", mostrarCatalogo);
@@ -449,13 +447,17 @@ function configurarHeroInterativa() {
     glintX: -20,
     spotX: 50,
     spotY: 45,
+    labelRot: 0,
   };
   const current = { ...target };
+  let rotBase = 0;
 
   let rafId = null;
   let resetTimer = null;
   let pulseTimer = null;
   let lastBubbleTime = 0;
+  let dedoPressionado = false;
+  let ultimaInteracao = 0;
 
   const animarMola = () => {
     const ease = 0.16;
@@ -481,6 +483,13 @@ function configurarHeroInterativa() {
     stage.style.setProperty("--glint-x", `${current.glintX.toFixed(1)}%`);
     stage.style.setProperty("--spot-x", `${current.spotX.toFixed(1)}%`);
     stage.style.setProperty("--spot-y", `${current.spotY.toFixed(1)}%`);
+    stage.style.setProperty(
+      "--label-shine",
+      `${(current.ry * -12).toFixed(1)}%`
+    );
+    let rotNorm = current.labelRot % 50;
+    if (rotNorm > 0) rotNorm -= 50;
+    stage.style.setProperty("--label-rot", `${rotNorm.toFixed(2)}%`);
 
     if (emMovimento) {
       rafId = requestAnimationFrame(animarMola);
@@ -561,7 +570,15 @@ function configurarHeroInterativa() {
     target.glintX = nx * 70;
     target.spotX = clampX * 100;
     target.spotY = clampY * 100;
+    target.labelRot = rotBase + nx * 16;
 
+    iniciarMola();
+  };
+
+  const girarRotulo3D = () => {
+    if (reduzMovimento) return;
+    rotBase -= 50;
+    target.labelRot = rotBase;
     iniciarMola();
   };
 
@@ -577,6 +594,7 @@ function configurarHeroInterativa() {
     target.glintX = -20;
     target.spotX = 50;
     target.spotY = 45;
+    target.labelRot = rotBase;
     iniciarMola();
   };
 
@@ -596,19 +614,28 @@ function configurarHeroInterativa() {
     if (e.pointerType !== "mouse") return;
     clearTimeout(resetTimer);
     stage.classList.add("is-interacting");
+    girarRotulo3D();
     emitirBolhas(e.clientX, e.clientY, 4, 55);
   });
 
   stage.addEventListener("pointermove", (e) => {
+    const agora = Date.now();
     if (e.pointerType === "mouse") {
       clearTimeout(resetTimer);
       stage.classList.add("is-interacting");
       atualizarAlvo(e.clientX, e.clientY, 1.06);
 
-      const agora = Date.now();
       if (agora - lastBubbleTime > 95) {
         lastBubbleTime = agora;
         emitirBolhas(e.clientX, e.clientY, 2, 42);
+      }
+    } else if (dedoPressionado) {
+      // Android: arrastar o dedo gira o frasco e solta bolhas pelo caminho
+      ultimaInteracao = agora;
+      atualizarAlvo(e.clientX, e.clientY, 1.08);
+      if (agora - lastBubbleTime > 110) {
+        lastBubbleTime = agora;
+        emitirBolhas(e.clientX, e.clientY, 2, 40);
       }
     }
   });
@@ -618,24 +645,113 @@ function configurarHeroInterativa() {
     resetarAlvo();
   });
 
+  const vibrar = (padrao) => {
+    if (navigator.vibrate) {
+      try {
+        navigator.vibrate(padrao);
+      } catch (_) {
+        /* ignora navegadores que bloqueiam vibração */
+      }
+    }
+  };
+
+  // ---------- Giroscópio (Android): o frasco acompanha a inclinação do celular ----------
+  let giroscopioAtivo = false;
+  let betaBase = null;
+
+  const aoInclinar = (e) => {
+    if (e.gamma == null || e.beta == null) return;
+    if (!estaNaTelaInicial() || dedoPressionado) return;
+    if (Date.now() - ultimaInteracao < 900) return;
+
+    if (betaBase === null) betaBase = e.beta;
+    giroscopioAtivo = true;
+
+    const gx = Math.max(-1, Math.min(1, e.gamma / 30));
+    const gy = Math.max(-1, Math.min(1, (e.beta - betaBase) / 30));
+
+    target.ry = gx * 18;
+    target.rx = -gy * 12;
+    target.tx = gx * 10;
+    target.ty = gy * 6;
+    target.ringX = -gx * 12;
+    target.ringY = -gy * 8;
+    target.glintX = gx * 60;
+    iniciarMola();
+  };
+
+  const ativarGiroscopio = () => {
+    if (reduzMovimento || !("DeviceOrientationEvent" in window)) return;
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      // iPhone exige permissão após um toque
+      DeviceOrientationEvent.requestPermission()
+        .then((estado) => {
+          if (estado === "granted") {
+            window.addEventListener("deviceorientation", aoInclinar);
+          }
+        })
+        .catch(() => {});
+    } else {
+      window.addEventListener("deviceorientation", aoInclinar);
+    }
+  };
+
+  if (
+    "DeviceOrientationEvent" in window &&
+    typeof DeviceOrientationEvent.requestPermission !== "function"
+  ) {
+    ativarGiroscopio();
+  }
+
+  // ---------- Balanço automático quando ninguém está interagindo ----------
+  if (!reduzMovimento) {
+    let lado = 1;
+    setInterval(() => {
+      if (!estaNaTelaInicial() || document.hidden) return;
+      if (giroscopioAtivo || dedoPressionado) return;
+      if (stage.classList.contains("is-interacting")) return;
+      if (Date.now() - ultimaInteracao < 2500) return;
+      lado *= -1;
+      target.ry = lado * 9;
+      target.rx = 2;
+      target.glintX = lado * 35;
+      target.ringX = -lado * 6;
+      iniciarMola();
+    }, 2200);
+  }
+
   // Toque / Clique: Android-first sem bloquear rolagem vertical
+  let pedidoGiroscopioFeito = false;
   stage.addEventListener("pointerdown", (e) => {
+    ultimaInteracao = Date.now();
     if (e.pointerType !== "mouse") {
+      dedoPressionado = true;
       clearTimeout(resetTimer);
       stage.classList.add("is-interacting");
       atualizarAlvo(e.clientX, e.clientY, 1.08);
+      vibrar(12);
+    }
+    if (!pedidoGiroscopioFeito) {
+      pedidoGiroscopioFeito = true;
+      if (typeof window.DeviceOrientationEvent?.requestPermission === "function") {
+        ativarGiroscopio();
+      }
     }
     dispararPulso(e.clientX, e.clientY);
+    girarRotulo3D();
   });
 
   stage.addEventListener("pointerup", (e) => {
     if (e.pointerType !== "mouse") {
+      dedoPressionado = false;
+      ultimaInteracao = Date.now();
       clearTimeout(resetTimer);
       resetTimer = setTimeout(resetarAlvo, 520);
     }
   });
 
   stage.addEventListener("pointercancel", () => {
+    dedoPressionado = false;
     clearTimeout(resetTimer);
     resetarAlvo();
   });
@@ -648,9 +764,42 @@ function configurarHeroInterativa() {
       target.ty = -6;
       iniciarMola();
       dispararPulso();
+      girarRotulo3D();
       clearTimeout(resetTimer);
       resetTimer = setTimeout(resetarAlvo, 650);
     }
+  });
+}
+
+// Botão "Navegar": ondulação no toque + saída animada da tela inicial
+function configurarBotaoNavegar() {
+  const botao = document.getElementById("hero-entrar-btn");
+  const telaInicio = document.getElementById("view-inicio");
+  if (!botao) return;
+
+  botao.addEventListener("pointerdown", (e) => {
+    const rect = botao.getBoundingClientRect();
+    const tamanho = Math.max(rect.width, rect.height);
+    const onda = document.createElement("span");
+    onda.className = "hero__cta-ripple";
+    onda.style.width = onda.style.height = `${tamanho}px`;
+    onda.style.left = `${e.clientX - rect.left - tamanho / 2}px`;
+    onda.style.top = `${e.clientY - rect.top - tamanho / 2}px`;
+    onda.addEventListener("animationend", () => onda.remove(), { once: true });
+    botao.appendChild(onda);
+  });
+
+  botao.addEventListener("click", () => {
+    const reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!telaInicio || reduz) {
+      entrarNoSite();
+      return;
+    }
+    telaInicio.classList.add("hero--leaving");
+    setTimeout(() => {
+      telaInicio.classList.remove("hero--leaving");
+      entrarNoSite();
+    }, 360);
   });
 }
 

@@ -8,6 +8,10 @@
     />
     <meta name="theme-color" content="#ffffff" />
     <title>Eleve - Soluções em Limpeza</title>
+    <!-- Favicon (logo Eleve) -->
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="docs/favicon.png" />
+    <link rel="apple-touch-icon" href="docs/apple-touch-icon.png" />
     <!-- Fontes do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +27,19 @@
     <section class="hero" id="view-inicio" aria-labelledby="hero-title">
       <div class="hero__bg-orb hero__bg-orb--primary" aria-hidden="true"></div>
       <div class="hero__bg-orb hero__bg-orb--accent" aria-hidden="true"></div>
+
+      <!-- Bolhas ambientes subindo pela tela inicial -->
+      <div class="hero__ambient" aria-hidden="true">
+        <span style="--l: 6%; --s: 14px; --d: 11s; --dl: 0s"></span>
+        <span style="--l: 18%; --s: 8px; --d: 8s; --dl: 2.5s"></span>
+        <span style="--l: 29%; --s: 18px; --d: 13s; --dl: 5s"></span>
+        <span style="--l: 41%; --s: 10px; --d: 9s; --dl: 1.2s"></span>
+        <span style="--l: 55%; --s: 22px; --d: 14s; --dl: 3.4s"></span>
+        <span style="--l: 66%; --s: 9px; --d: 10s; --dl: 6s"></span>
+        <span style="--l: 77%; --s: 16px; --d: 12s; --dl: 0.8s"></span>
+        <span style="--l: 88%; --s: 11px; --d: 9.5s; --dl: 4.2s"></span>
+        <span style="--l: 95%; --s: 20px; --d: 15s; --dl: 7s"></span>
+      </div>
 
       <div class="hero__container">
         <div class="hero__brand">
@@ -71,14 +88,41 @@
 
             <div class="hero__bottle-wrap" id="hero-bottle-wrap">
               <div class="hero__glint" aria-hidden="true"></div>
-              <img
-                src="docs/lava-roupas-hero.png"
-                alt="Frasco de Lava Roupas Concentrado Eleve"
-                class="hero__bottle"
-                width="430"
-                height="844"
-                draggable="false"
-              />
+              <div class="hero__bottle-inner">
+                <img
+                  src="docs/lava-roupas-hero.png"
+                  alt="Frasco de Lava Roupas Concentrado Eleve"
+                  class="hero__bottle"
+                  width="430"
+                  height="844"
+                  draggable="false"
+                />
+                <!-- Rótulo cilíndrico 3D apenas com a logo Eleve -->
+                <div class="hero__label" aria-hidden="true">
+                  <div class="hero__label-track">
+                    <div class="hero__label-slide">
+                      <img
+                        src="docs/logo_eleve.png"
+                        alt=""
+                        class="hero__label-logo"
+                        width="380"
+                        height="171"
+                        draggable="false"
+                      />
+                    </div>
+                    <div class="hero__label-slide">
+                      <img
+                        src="docs/logo_eleve.png"
+                        alt=""
+                        class="hero__label-logo"
+                        width="380"
+                        height="171"
+                        draggable="false"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="hero__bottle-shadow" aria-hidden="true"></div>
