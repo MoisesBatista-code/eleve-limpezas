@@ -52,17 +52,6 @@ const listaProdutos = [
       "Seu café mais prático e gostoso! Copos descartáveis resistentes e seguros, ideais para café e bebidas quentes com qualidade e praticidade no seu dia a dia.",
   },
   {
-    id: 6,
-    nome: "Amaciante Concentrado Limpa Bom 4L",
-    categoria: "Roupas",
-    preco: 13.99,
-    imagem:
-      '<img src="docs/AMACIANTE 4L.jpg" alt="Amaciante Concentrado Limpa Bom Sonho 4L">',
-    emDestaque: false,
-    descricao:
-      "Amaciante concentrado Limpa Bom Sonho 4L. Deixa suas roupas muito mais macias, fáceis de passar e deliciosamente perfumadas por muito mais tempo.",
-  },
-  {
     id: 7,
     nome: "Papel Toalha Águia 1000 (Pacote Fechado)",
     categoria: "Papel",
@@ -93,17 +82,7 @@ const listaProdutos = [
     descricao:
       "Papel higiênico folha simples neutro, macio e resistente. Pacote com 4 rolos de 30m x 10cm cada.",
   },
-  {
-    id: 10,
-    nome: "Pregador de Madeira 24 Peças",
-    categoria: "Utilidades",
-    preco: 4.8,
-    imagem:
-      '<img src="docs/PREGADOR.jpg" alt="Conjunto de Pregadores de Madeira 24 peças">',
-    emDestaque: false,
-    descricao:
-      "Conjunto com 24 pregadores de madeira com mola de aço. Resistentes e duráveis, ideais para uso doméstico e perfeitos para roupas e roupas leves.",
-  },
+
   {
     id: 11,
     nome: "Sabonete Líquido Limpa Bom 4L",
@@ -156,6 +135,83 @@ const listaProdutos = [
     emDestaque: false,
     descricao:
       "Copos descartáveis Copobras de 180ml. Ideal para festas, eventos, reuniões e muito mais.",
+  },
+  {
+    id: 16,
+    nome: "Amaciante Concentrado 2L",
+    categoria: "Roupas",
+    preco: 12.0,
+    imagem:
+      '<img src="docs/AMACIANTE 2L.jpg" alt="Amaciante Concentrado Agreste Limp 2L">',
+    emDestaque: false,
+    descricao:
+      "Amaciante concentrado e cheiro em três aromas (Elegance, Sensação e Glamour)! Deixa suas roupas macias e perfumadas por muito mais tempo.",
+  },
+  {
+    id: 17,
+    nome: "Base Limpador Perfumado (Refil) 5L",
+    categoria: "Desinfetante",
+    preco: 8.0,
+    imagem:
+      '<img src="docs/BASE LIMPADOR PERFUMADO REFIL.jpg" alt="Base Limpador Perfumado Desinfetante Refil 5L">',
+    emDestaque: false,
+    descricao:
+      "Base limpador perfumado e desinfetante para 5L de produto pronto (Refil). Disponível nas fragrâncias Frutais, Herbais, Florais e Aromáticas.",
+  },
+  {
+    id: 18,
+    nome: "Limpa Vidros 1L Refil",
+    categoria: "Limpeza",
+    preco: 10.0,
+    imagem:
+      '<img src="docs/LIMPA VIDROS 1L REFIL.jpg" alt="Limpa Vidros 1L Refil Agreste Limp">',
+    emDestaque: false,
+    descricao:
+      "Limpa vidros 1L refil Agreste Limp. Não deixa manchas, tem secagem rápida e garante brilho intenso para vidros, espelhos e superfícies.",
+  },
+  {
+    id: 19,
+    nome: "Multiuso Anti-Odor com Gatilho 1L",
+    categoria: "Multiuso",
+    preco: 14.0,
+    imagem:
+      '<img src="docs/MULTIUSO ANTI-ODOR 1L.jpg" alt="Multiuso Anti-Odor com Gatilho 1L Limão ou Laranja">',
+    emDestaque: false,
+    descricao:
+      "Multiuso anti-odor com gatilho 1L Agreste Limp. Praticidade na limpeza do dia a dia, eliminando odores indesejados. Disponível nas fragrâncias Limão ou Laranja.",
+  },
+  {
+    id: 20,
+    nome: "Lava Louças Especial Anti-Odor (Laranja) Refil 1L",
+    categoria: "Cozinha",
+    preco: 8.0,
+    imagem:
+      '<img src="docs/LAVA LOUCAS ANTI-ODOR 1L.jpg" alt="Lava Louças Especial Anti-Odor Laranja Refil 1L">',
+    emDestaque: false,
+    descricao:
+      "Lava louças especial anti-odor fragrância de laranja (refil 1L) Agreste Limp. Remove gorduras e sujeiras com eficiência, neutralizando odores difíceis na sua cozinha.",
+  },
+  {
+    id: 21,
+    nome: "Pasta Brilho Panelas 500g",
+    categoria: "Cozinha",
+    preco: 12.0,
+    imagem:
+      '<img src="docs/PASTA BRILHO 500G.jpg" alt="Pasta Brilho Panelas 500g Agreste Limp">',
+    emDestaque: false,
+    descricao:
+      "Pasta brilho para panelas 500g Agreste Limp. Remove manchas e gorduras difíceis, devolvendo o brilho intenso para panelas, alumínio, inox e utensílios de cozinha.",
+  },
+  {
+    id: 22,
+    nome: "Sabão Geleia 1kg",
+    categoria: "Limpeza",
+    preco: 12.0,
+    imagem:
+      '<img src="docs/SABAO GELEIA.jpg" alt="Sabão Geleia 1kg Agreste Limp">',
+    emDestaque: false,
+    descricao:
+      "Sabão geleia 1kg Agreste Limp com poderosa ação de limpeza. Ideal para porcelanato, cerâmica, azulejo, mármores e granito.",
   },
 ];
 
@@ -228,7 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (estaNaTelaInicial()) {
       entrarNoSite("contato");
     } else {
-      document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+      document
+        .getElementById("contato")
+        ?.scrollIntoView({ behavior: "smooth" });
     }
   });
 
@@ -433,7 +491,7 @@ function configurarHeroInterativa() {
   if (!stage) return;
 
   const reduzMovimento = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
+    "(prefers-reduced-motion: reduce)",
   ).matches;
 
   const target = {
@@ -485,7 +543,7 @@ function configurarHeroInterativa() {
     stage.style.setProperty("--spot-y", `${current.spotY.toFixed(1)}%`);
     stage.style.setProperty(
       "--label-shine",
-      `${(current.ry * -12).toFixed(1)}%`
+      `${(current.ry * -12).toFixed(1)}%`,
     );
     let rotNorm = current.labelRot % 50;
     if (rotNorm > 0) rotNorm -= 50;
@@ -504,7 +562,12 @@ function configurarHeroInterativa() {
     }
   };
 
-  const emitirBolhas = (clientX, clientY, quantidade = 6, espalhamento = 70) => {
+  const emitirBolhas = (
+    clientX,
+    clientY,
+    quantidade = 6,
+    espalhamento = 70,
+  ) => {
     if (!particleLayer || reduzMovimento) return;
     if (particleLayer.childElementCount > 24) return;
 
@@ -544,7 +607,7 @@ function configurarHeroInterativa() {
         () => {
           bolha.remove();
         },
-        { once: true }
+        { once: true },
       );
 
       particleLayer.appendChild(bolha);
@@ -733,7 +796,9 @@ function configurarHeroInterativa() {
     }
     if (!pedidoGiroscopioFeito) {
       pedidoGiroscopioFeito = true;
-      if (typeof window.DeviceOrientationEvent?.requestPermission === "function") {
+      if (
+        typeof window.DeviceOrientationEvent?.requestPermission === "function"
+      ) {
         ativarGiroscopio();
       }
     }
